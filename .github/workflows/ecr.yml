@@ -3,7 +3,10 @@ name: Deploying AWS ECR repo and pushing Docker Image To ECR
 on:
   push:
     paths:
-      - NodeJsEcs/ECR
+      - NodeJsApp/ECR/**
+  pull_request:
+    paths:
+      - NodeJsApp/ECR/**
 
 jobs:
   creation_of_ecr_repo:
