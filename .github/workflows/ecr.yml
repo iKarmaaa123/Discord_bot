@@ -16,6 +16,13 @@ jobs:
         shell: bash
 
     steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          aws-access-key: ${secret.AWS_ACCESS_KEY}
+          aws-secret-access-key: ${secret.AWS_SECRET_ACCESS_KEY}
+
       - name: Checkout
         uses: actions/checkout@v4
 
