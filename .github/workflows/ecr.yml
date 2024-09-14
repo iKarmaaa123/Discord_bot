@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - NodeJsApp/ECR
 
 jobs:
   creation_of_ecr_repo:
