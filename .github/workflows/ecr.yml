@@ -2,9 +2,11 @@ name: Deploying AWS ECR repo and pushing Docker Image To ECR
 
 on:
   push:
+    branches:
+      - main
     paths:
       - NodeJsApp/ECR/**
-      
+
 jobs:
   creation_of_ecr_repo:
     name: Terraform

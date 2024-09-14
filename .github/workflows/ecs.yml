@@ -2,9 +2,11 @@ name: Deploy Node js App to ECR
 
 on:
   push:
+    branches:
+      - main
     paths:
       - NodeJsApp/ECS/**
-      
+
 jobs:
   build:
     name: Build Image
