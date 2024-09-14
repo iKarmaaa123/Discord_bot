@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - NodeJsApp/ECR/**
+      - NodeJsApp/ECR
 
 jobs:
   creation_of_ecr_repo:

@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - NodeJsApp/ECS/**
+      - NodeJsApp/ECS
 
 jobs:
   build:
