@@ -71,4 +71,4 @@ resource "aws_ecs_service" "my_aws_ecs_service" {
     assign_public_ip = true
   }
 }
-//gndjngjdsbgjbsnfngjnjsfndfnds
+//gndjngjdsbg
