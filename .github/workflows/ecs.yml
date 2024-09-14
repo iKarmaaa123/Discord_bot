@@ -4,10 +4,7 @@ on:
   push:
     paths:
       - NodeJsApp/ECS/**
-  pull_request:
-    paths:
-      - NodeJsApp/ECS/**
-
+      
 jobs:
   build:
     name: Build Image
