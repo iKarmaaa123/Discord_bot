@@ -1,9 +1,10 @@
-name: Deploy Node js App to ECR
+name: Pushing Docker Image to ECR
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["ecr"]
+    types:
+      - completed
   
 jobs:
   build:
