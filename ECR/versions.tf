@@ -13,7 +13,7 @@ terraform {
 // setting up s3 bucket for a remote backend
 terraform {
   backend "s3" {
-    bucket = "terraform-ecs-nodejs"
+    bucket = "terraform-ecr-nodejs"
     key    = "statefile2/terraform.tfstate"
     region = "us-east-1"
     }
