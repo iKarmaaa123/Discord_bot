@@ -29,6 +29,9 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: CD into ECR directory
+        run: cd ECS
+
       - name: Terraform Init
         run: terraform init
 
@@ -41,5 +44,8 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve
 
     
