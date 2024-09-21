@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: cding into ecr
-        run: ecr
+        run: cd ecr
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
