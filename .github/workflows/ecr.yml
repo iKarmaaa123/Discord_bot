@@ -19,6 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: cding into ecr
+        uses: cd ecr
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
