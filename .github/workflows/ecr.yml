@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: cding into ecr
-        uses: cd ecr
+        uses: cd $GITHUB_WORKSPACE/ecr
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
