@@ -31,6 +31,9 @@ jobs:
 
       - name: CD into ECR directory
         working-directory: ./ECR
+        run: |
+          echo "Running commands in the subdirectory"
+          ls -la
 
       - name: Terraform Init
         run: terraform init
