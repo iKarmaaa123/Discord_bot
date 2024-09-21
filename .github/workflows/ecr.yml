@@ -30,7 +30,7 @@ jobs:
           aws-region: us-east-1
 
       - name: CD into ECR directory
-        run: cd NodeJsApp/ECR
+        run: cd ECR
 
       - name: Terraform Init
         run: terraform init
