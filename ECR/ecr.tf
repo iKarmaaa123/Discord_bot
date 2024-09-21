@@ -7,3 +7,5 @@ resource "aws_ecr_repository" "my_aws_ecr_repository" {
     scan_on_push = true
   }
 }
+
+//ngndgndjs
