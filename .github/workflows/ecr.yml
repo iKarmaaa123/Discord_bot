@@ -29,12 +29,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: CD into ECR directory
-        working-directory: ./ECR
-        run: |
-          echo "Running commands in the subdirectory"
-          ls -la
-
       - name: Terraform Init
         run: terraform init
 
