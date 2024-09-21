@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: cding into ecr
-        workflow-directory: ecr
+        uses: ECR
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
