@@ -19,11 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: cding into ecr
-        run: | 
-          cd ECR
-           ls -la
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
@@ -35,19 +30,29 @@ jobs:
           aws-region: us-east-1
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd ECR 
+          terraform init
 
       - name: Terraform Format
-        run: terraform fmt -check
+        run: | 
+          cd ECR
+          terraform fmt -check
 
       - name: Terraform Plan
-        run: terraform plan -input=false
+        run: |
+          cd ECR 
+          terraform plan -input=false
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: | 
+          cd ECR
+          terraform apply -auto-approve -input=false
 
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+        run:
+          cd ECR 
+          terraform destroy -auto-approve
 
     
