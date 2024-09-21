@@ -30,7 +30,7 @@ jobs:
           aws-region: us-east-1
 
       - name: CD into ECR directory
-        run: cd ECR
+        working-directory: ./ECR
 
       - name: Terraform Init
         run: terraform init
