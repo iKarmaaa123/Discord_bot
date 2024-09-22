@@ -2,7 +2,7 @@ name: Creating ECR Repository
 
 on:
   push:
-    branch:
+    branches:
       - main
 
 jobs:
