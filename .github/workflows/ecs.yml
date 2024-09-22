@@ -1,10 +1,9 @@
 name: Deploying ECS resources
 
 on:
-  workflow_run:
-    workflows: ["push"]
-    types: 
-      - completed
+  push:
+    branches:
+      - mian
 
 jobs:
   terraform:
