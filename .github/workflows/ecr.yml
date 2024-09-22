@@ -45,9 +45,4 @@ jobs:
           cd ECR
           terraform apply -auto-approve -input=false
 
-      - name: Terraform Destroy
-        run: |
-          cd ECR 
-          terraform destroy -auto-approve
-
     
