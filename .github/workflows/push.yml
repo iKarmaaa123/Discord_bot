@@ -1,7 +1,11 @@
 name: Pushing Docker Image to ECR
 
 on:
-  workflow_dispatch:
+  on:
+  workflow_run:
+    workflows: [ecr]
+    types:
+      - completed
   
 jobs:
   build:
