@@ -1,9 +1,8 @@
 name: Pushing Docker Image to ECR
 
 on:
-  on:
   workflow_run:
-    workflows: ["Creating ECR Repository"]
+    workflows: [Creating ECR Repository]
     types:
       - completed
   
