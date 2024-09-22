@@ -1,9 +1,7 @@
 name: Deploying ECS resources
 
 on:
-  push:
-    branches:
-      - mian
+  workflow_dispatch:
 
 jobs:
   terraform:

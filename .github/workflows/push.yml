@@ -1,9 +1,7 @@
 name: Pushing Docker Image to ECR
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
   
 jobs:
   build:
