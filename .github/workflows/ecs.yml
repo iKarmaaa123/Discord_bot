@@ -1,7 +1,10 @@
 name: Deploying ECS resources
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ['push']
+    types: 
+      - completed
 
 jobs:
   terraform:

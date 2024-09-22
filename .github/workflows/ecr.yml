@@ -1,7 +1,10 @@
 name: Creating ECR Repository
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
 
 jobs:
   creation_of_ecr_repo:
