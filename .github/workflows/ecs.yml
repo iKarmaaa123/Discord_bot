@@ -1,10 +1,7 @@
 name: Deploying ECS resources
 
 on:
-  workflow_run:
-    workflows: ["push"]
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   terraform:
@@ -31,18 +28,18 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Init
-        run: terraform init
-
-      - name: Terraform Format
-        run: terraform fmt -check
+        run: |
+          cd ECS
+          terraform init
 
       - name: Terraform Plan
-        run: terraform plan -input=false
+        run: |
+          cd ECS 
+          terraform plan -input=false
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
-
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+        run: |
+          cd ECS 
+          terraform apply -auto-approve -input=false
 
