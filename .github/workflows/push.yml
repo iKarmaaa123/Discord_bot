@@ -27,10 +27,16 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build a Docker image
-        run: docker build -t awsecrimage:latest .
+        run: |
+          cd Image 
+          docker build -t awsecrimage:latest .
 
       - name: Tag the Docker image
-        run: docker tag awsecrimage {{ secrets.ECR_REGISTRY }}
+        run: |
+          cd Image
+          docker tag awsecrimage {{ secrets.ECR_REGISTRY }}
 
       - name: push Docker image to AWS ECR
-        run: docker push {{ secrets.ECR_REGISTRY }}
+        run: |
+          cd Image 
+          docker push {{ secrets.ECR_REGISTRY }}
