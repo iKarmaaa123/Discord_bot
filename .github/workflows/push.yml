@@ -34,7 +34,7 @@ jobs:
       - name: Tag the Docker image
         run: |
           cd Image
-          docker tag awsecrimage {{ secrets.ECR_REGISTRY }}
+          docker tag awsecrimage 
 
       - name: push Docker image to AWS ECR
         run: |
