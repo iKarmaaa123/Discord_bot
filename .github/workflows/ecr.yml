@@ -7,7 +7,7 @@ on:
 
 jobs:
   creation_of_ecr_repo:
-    name: Terraform
+    name: Creating ECR Repo
     runs-on: ubuntu-latest
     environment: production
 
@@ -44,5 +44,40 @@ jobs:
         run: | 
           cd ECR
           terraform apply -auto-approve -input=false
+
+  build:
+    name: Building Docker And Pushing Docker Image To AWS ECR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build a Docker image
+        run: |
+          cd Image 
+          docker build -t awsecrimage:latest .
+
+      - name: Tag the Docker image
+        run: |
+          cd Image
+          docker tag awsecrimage:latest ${{ secrets.ECR_REGISTRY }}/awsecrimage:latest
+
+      - name: Push Docker image to AWS ECR
+        run: |
+          cd Image 
+          docker push ${{ secrets.ECR_REGISTRY }}/awsecrimage:latest
+
 
     

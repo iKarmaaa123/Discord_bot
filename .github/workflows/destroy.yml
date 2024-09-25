@@ -1,0 +1,39 @@
+name: Terraform Destroy
+
+on:
+  workflow_run:
+    workflows: [Deploying ECS resources]
+    types:
+      - completed
+
+jobs:
+  Terraform Destroy ECR resources:
+  runs on: ubuntu-latest
+  environment: dev
+
+  defaults:
+    run:
+      shell: bash
+
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setting up Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: configure AWS credentials
+      uses: actions/checkout@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: CD Into ECR Directory And Destroy The ECR Resoruces
+      uses: |
+        cd ECR
+        terraform destroy
+
+    - name: CD into ECS Directory And Destroy The ECR Resources
+      uses: |
+        cd ECS
+        terraformd destroy
