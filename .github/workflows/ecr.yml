@@ -77,7 +77,7 @@ jobs:
       - name: Push Docker image to AWS ECR
         run: |
           cd Image 
-          docker push awsecrimage ${{ secrets.ECR_REGISTRY }}
+          docker push awsecrimage:latests ${{ secrets.ECR_REGISTRY }}
 
 
     
