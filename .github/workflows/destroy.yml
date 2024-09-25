@@ -2,7 +2,9 @@ name: Terraform Destroy
 
 on:
   workflow_run:
-    workflows: [Deploying ECS resources]
+    workflows:
+      - Creating ECR Repository and Pushing Dcoker Image to ECR repo
+      - Deploying ECS resources
     types:
       - completed
 

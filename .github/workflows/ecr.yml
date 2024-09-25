@@ -1,4 +1,4 @@
-name: Creating ECR Repository
+name: Creating ECR Repository and Pushing Dcoker Image to ECR repo
 
 on:
   push:
@@ -72,12 +72,12 @@ jobs:
       - name: Tag the Docker image
         run: |
           cd Image
-          docker tag awsecrimage:latest ${{ secrets.ECR_REGISTRY }}/awsecrimage:latest
+          docker tag awsecrimage:latest ${{ secrets.ECR_REGISTRY }}
 
       - name: Push Docker image to AWS ECR
         run: |
           cd Image 
-          docker push ${{ secrets.ECR_REGISTRY }}/awsecrimage:latest
+          docker push awsecrimage ${{ secrets.ECR_REGISTRY }}
 
 
     
