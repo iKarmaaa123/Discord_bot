@@ -1,12 +1,7 @@
 name: Terraform Destroy
 
 on:
-  workflow_run:
-    workflows:
-      - Creating ECR Repository and Pushing Dcoker Image to ECR repo
-      - Deploying ECS resources
-    types:
-      - completed
+  workflow_disptach:
 
 jobs:
   Terraform Destroy ECR resources:
@@ -16,10 +11,6 @@ jobs:
   defaults:
     run:
       shell: bash
-
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v2
 
     - name: Setting up Terraform
       uses: hashicorp/setup-terraform@v1
