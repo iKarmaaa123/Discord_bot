@@ -1,8 +1,6 @@
 name: Destroying ECR And ECS resources
 
-on:
-  push:
-    workflow_disptach:
+on: workflow_disptach
 
 jobs:
   Terraform Destroy ECR resources:
