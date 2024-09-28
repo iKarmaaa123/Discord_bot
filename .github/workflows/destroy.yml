@@ -10,8 +10,8 @@ on:
 
 jobs:
   Terraform Destroy ECR resources:
-  runs on: ubuntu-latest
-  environment: dev
+    runs on: ubuntu-latest
+    environment: dev
 
   defaults:
     run:

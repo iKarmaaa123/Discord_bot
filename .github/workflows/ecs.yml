@@ -2,7 +2,7 @@ name: Deploying ECS resources
 
 on:
   workflow_run:
-    workflows: [Pushing Docker Image to ECR]
+    workflows: [Creating ECR Repository and Pushing Dcoker Image to ECR repo]
     types:
       - completed
 
