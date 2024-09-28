@@ -44,4 +44,8 @@ jobs:
         run: |
           cd ECS 
           terraform apply -auto-approve -input=false
-        #nfnsksnfns
+        
+        - name: Terraform Destroy
+          run: |
+            cd ECS
+            terraform destroy -auto-approve
