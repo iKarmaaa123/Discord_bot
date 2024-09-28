@@ -28,4 +28,7 @@ jobs:
           terraform destroy -auto-approve
 
       - name: CD into ECS directory and destroy the ECS
+        run: |
+          cd ECS
+          terraform destroy -auto-approve
 
