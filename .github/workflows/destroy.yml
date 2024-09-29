@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: checkout code
         uses: actions/checkout@v4
-        
+
       - name: Setting up Terraform
         uses: hashicorp/setup-terraform@v1
 
@@ -29,11 +29,13 @@ jobs:
       - name: CD into ECR directory and destroy the ECR resources
         run: |
           cd ECR
+          terraform init
           terraform destroy -auto-approve
 
       - name: CD into ECS directory and destroy the ECS
         run: |
           cd ..
           cd ECS
+          terraform init
           terraform destroy -auto-approve
 
