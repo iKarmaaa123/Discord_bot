@@ -32,9 +32,8 @@ jobs:
           terraform init
           terraform destroy -auto-approve
 
-      - name: CD into ECS directory and destroy the ECS
+      - name: CD into ECS directory and destroy ECS resources
         run: |
-          cd ..
           cd ECS
           terraform init
           terraform destroy -auto-approve
