@@ -13,6 +13,9 @@ jobs:
         shell: bash
 
     steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+        
       - name: Setting up Terraform
         uses: hashicorp/setup-terraform@v1
 
@@ -30,6 +33,7 @@ jobs:
 
       - name: CD into ECS directory and destroy the ECS
         run: |
+          cd ..
           cd ECS
           terraform destroy -auto-approve
 
