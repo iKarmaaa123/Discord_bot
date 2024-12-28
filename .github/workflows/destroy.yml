@@ -38,9 +38,3 @@ jobs:
           terraform init
           terraform destroy -auto-approve
 
-      - name: CD into VPC directory and destroy ECS resources
-        run: |
-          cd VPC
-          terraform init
-          terraform destroy -auto-approve
-

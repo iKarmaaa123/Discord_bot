@@ -1,9 +1,5 @@
-output "subnet_id_A" {
-    value = aws_subnet.my_aws_subnet_A.id
-}
-
-output "subnet_id_B" {
-    value = aws_subnet.my_aws_subnet_B.id
+output "subnet_id" {
+    value = aws_subnet.my_aws_subnet.id
 }
 
 output "default_security_group_id" {

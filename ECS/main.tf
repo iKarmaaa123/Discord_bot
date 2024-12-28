@@ -3,26 +3,37 @@ module "vpcmodule" {
   source = "../VPC"
 }
 
-// ecs resource
+// ecs cluster
 resource "aws_ecs_cluster" "my_aws_ecs_cluster" {
-  name = "nodejsapptestcluster"
+  name = "discordbotcluster"
+  setting {
+    name  = "containerInsights"
+    value = "disabled"
+  }
+  
+   tags = {
+    environment = "development"
+    project     = "discordbotcluster"
+  }
 }
 
 // ecs task definitions
 resource "aws_ecs_task_definition" "my_aws_ecs_task_definition" {
-  family                   = "app-first-task"
+  family                   = "discord-bot"
   container_definitions    = <<DEFINITION
   [
     {
-      "name": "app-first-task",
-      "image": "648767092427.dkr.ecr.us-east-1.amazonaws.com/test-nodejs-application",
+      "name": "discord-bot",
+      "image": "648767092427.dkr.ecr.us-east-1.amazonaws.com/test-discord-bot:latest",
       "essential": true,
-      "portMappings": [
-        {
-          "containerPort": 80,
-          "hostPort": 80
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+        "awslogs-group": "ECS_DISCORD-BOT-LOG_GROUP",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "ECS-DISCORD-BOT-LOG_STREAM"
         }
-      ],
+      },
       "memory": 512,
       "cpu": 256
     }
@@ -32,43 +43,25 @@ resource "aws_ecs_task_definition" "my_aws_ecs_task_definition" {
   network_mode             = "awsvpc"    
   memory                   = 512         
   cpu                      = 256        
-  execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
-}
-
-// iam role
-resource "aws_iam_role" "ecsTaskExecutionRole" {
-  name               = "ecsTaskExecutionRole"
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy.json}"
-}
-
-data "aws_iam_policy_document" "assume_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
-    }
-  }
-}
-
-resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
-  role       = "${aws_iam_role.ecsTaskExecutionRole.name}"
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+  execution_role_arn       = "${aws_iam_role.ecs_task_execution_role.arn}"
+  task_role_arn            = "${aws_iam_role.ecs_task_role.arn}"
 }
 
 // ecs service
 resource "aws_ecs_service" "my_aws_ecs_service" {
-  name            = "nodejsappservice"
+  name            = "discordbotservice"
+  desired_count = 1
   cluster         = aws_ecs_cluster.my_aws_ecs_cluster.id
   task_definition = aws_ecs_task_definition.my_aws_ecs_task_definition.arn
-  desired_count   = 2
   launch_type = "FARGATE"
 
+  tags = {
+    environment = "evelopment"
+  }
+
   network_configuration {
-    subnets = [module.vpcmodule.subnet_id_A, module.vpcmodule.subnet_id_B]
+    subnets = [module.vpcmodule.subnet_id]
     security_groups = [module.vpcmodule.default_security_group_id]
     assign_public_ip = true
   }
 }
-//gndjngjdsbgm,nfdjnd

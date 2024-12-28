@@ -1,0 +1,12 @@
+  discovery:
+    jobs:
+    - regions:
+        - us-east-2
+      type: ecs
+      enableMetricData: true
+      metrics:
+      - name: CPU Utilization
+        statistics:
+        - Sum
+        period: 300
+        length: 600
