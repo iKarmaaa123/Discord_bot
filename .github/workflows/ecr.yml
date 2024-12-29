@@ -63,16 +63,19 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      #- name: Build a Docker image
-       # run: |
-        #  cd discord_bot 
-          #docker build -t awsecrimage:latest .
+      - name: Build a Docker image
+        run: |
+          cd discord_bot 
+          docker build -t awsecrimage:latest .
 
       - name: Tag the Docker image
         run: |
           cd discord_bot
-          docker build -t awsecrimage:latest
           docker tag awsecrimage:latest ${{ secrets.ECR_REGISTRY }}
+
+      - name: Push the Docker image
+        run: |
+          cd discord_bot
           docker push ${{ secrets.ECR_REGISTRY }}
 
   ECS_DEPLOYMENT:
