@@ -70,7 +70,7 @@ jobs:
 
       - name: Tag the Docker image
         run: |
-          cd discor_bot
+          cd discord_bot
           docker build -t awsecrimage:latest
           docker tag awsecrimage:latest ${{ secrets.ECR_REGISTRY }}
           docker push ${{ secrets.ECR_REGISTRY }}
