@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  creation_of_ecr_repo:
+  ECR_REPO:
     name: Creating ECR Repo
     runs-on: ubuntu-latest
     environment: production
@@ -40,12 +40,11 @@ jobs:
           terraform plan -input=false
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: | 
           cd ECR
-          terraform apply -auto-approve -input=false
+          terraform apply -auto-approve
 
-  build:
+  DOCKER_IMAGE:
     name: Building Docker And Pushing Docker Image To AWS ECR
     runs-on: ubuntu-latest
 
@@ -71,7 +70,7 @@ jobs:
 
       - name: Tag the Docker image
         run: |
-          cd Image
+          cd discrd
           docker tag awsecrimage:latest ${{ secrets.ECR_REGISTRY }}
 
       - name: Push Docker image to AWS ECR
