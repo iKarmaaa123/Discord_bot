@@ -9,7 +9,7 @@ jobs:
   ECR_REPO:
     name: Creating ECR Repo
     runs-on: ubuntu-latest
-    environment: production
+    environment: development
 
     defaults:
       run:
@@ -63,24 +63,21 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build a Docker image
-        run: |
-          cd discord_bot 
-          docker build -t awsecrimage:latest .
+      #- name: Build a Docker image
+       # run: |
+        #  cd discord_bot 
+          #docker build -t awsecrimage:latest .
 
       - name: Tag the Docker image
         run: |
-          cd discrd
+          cd discor_bot
+          docker build -t awsecrimage:latest
           docker tag awsecrimage:latest ${{ secrets.ECR_REGISTRY }}
-
-      - name: Push Docker image to AWS ECR
-        run: |
-          cd Image 
           docker push ${{ secrets.ECR_REGISTRY }}
 
   ECS_DEPLOYMENT:
     runs-on: ubuntu-latest
-    environment: production
+    environment: developmnt
 
     defaults:
       run:
@@ -108,12 +105,12 @@ jobs:
       - name: Terraform Plan
         run: |
           cd ECS 
-          terraform plan -input=false
+          terraform plan
 
       - name: Terraform Apply
         run: |
           cd ECS 
-          terraform apply -auto-approve -input=false
+          terraform apply -auto-approve
 
 
     
