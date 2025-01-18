@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  ECR_REPO:
+  ECR_DEPLOYMENT:
     name: Creating ECR Repo
     runs-on: ubuntu-latest
     environment: development
@@ -79,6 +79,7 @@ jobs:
           docker push ${{ secrets.ECR_REGISTRY }}
 
   ECS_DEPLOYMENT:
+    name: Deploying ECS resources to AWS
     runs-on: ubuntu-latest
     environment: developmnt
 
