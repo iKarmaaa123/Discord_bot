@@ -45,6 +45,7 @@ jobs:
           terraform apply -auto-approve
 
   DOCKER_IMAGE:
+    needs: ECR_DEPLOYMENT
     name: Building Docker And Pushing Docker Image To AWS ECR
     runs-on: ubuntu-latest
 
@@ -79,6 +80,7 @@ jobs:
           docker push ${{ secrets.ECR_REGISTRY }}
 
   ECS_DEPLOYMENT:
+    needs: DOCKER_IMAGE
     name: Deploying ECS resources to AWS
     runs-on: ubuntu-latest
     environment: developmnt
@@ -115,6 +117,3 @@ jobs:
         run: |
           cd ECS 
           terraform apply -auto-approve
-
-
-    #nbndfsd
