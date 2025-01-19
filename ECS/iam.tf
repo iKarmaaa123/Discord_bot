@@ -58,6 +58,34 @@ resource "aws_iam_role" "yace_role" {
 }
 */
 
+resource "aws_iam_policy" "ecs_container_insight_policy" {
+  name        = "ContainerInsightPolicy"
+  description = "Policy for what metrics ECS can report on to CloudWatch"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = "cloudwatch:PutMetricData",
+        Resource = "*",
+        Condition = {
+          StringEquals = {
+            "cloudwatch:namespace"   = "ECS/ContainerInsights",
+            "cloudwatch:metricName" = [
+              "CPUUtilized",
+              "MemoryUtilized"
+            ]
+          }
+        }
+      }
+    ]
+  })
+}
+
+
+
+
 resource "aws_iam_policy" "ecs_secrets_policy" {
   name        = "ecsSecretsManagerPolicy"
   description = "Policy for ECS to access Secrets Manager"
@@ -112,6 +140,11 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role_policy_attach
 resource "aws_iam_role_policy_attachment" "ecs_secrets_policy_attachment" {
   role       = aws_iam_role.ecs_task_role.name
   policy_arn = aws_iam_policy.ecs_secrets_policy.arn
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_secrets_policy_attachment" {
+  role = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = aws_iam_policy.ecs_container_insight_policy.arn
 }
 
 resource "aws_iam_user_policy_attachment" "project_user_policy_attachment" {

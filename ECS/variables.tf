@@ -1,13 +1,13 @@
 variable "aws_account_id" {
-    description = "aws account id for account"
-    type = string
-    default = ""
+  description = "aws account id for account"
+  type        = string
+  default     = ""
 }
 
 variable "region" {
-    description = "AWS region that we are going to deploy our resources to"
-    type = string
-    default = "us-east-1"
+  description = "AWS region that we are going to deploy our resources to"
+  type        = string
+  default     = "us-east-1"
 }
 
 variable "log_group_name" {

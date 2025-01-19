@@ -4,10 +4,10 @@ terraform {
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "~> 5.0"
     }
- }
+  }
 }
 
 // setting up s3 bucket for a remote backend
@@ -16,5 +16,5 @@ terraform {
     bucket = "terraform-ecs-nodejs"
     key    = "statefile2/terraform.tfstate"
     region = "us-east-1"
-    }
+  }
 }

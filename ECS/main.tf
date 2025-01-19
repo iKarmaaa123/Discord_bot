@@ -8,10 +8,10 @@ resource "aws_ecs_cluster" "my_aws_ecs_cluster" {
   name = "discordbotcluster"
   setting {
     name  = "containerInsights"
-    value = "disabled"
+    value = "enabled"
   }
-  
-   tags = {
+
+  tags = {
     environment = "development"
     project     = "discordbotcluster"
   }
@@ -40,28 +40,28 @@ resource "aws_ecs_task_definition" "my_aws_ecs_task_definition" {
   ]
   DEFINITION
   requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"    
-  memory                   = 512         
-  cpu                      = 256        
-  execution_role_arn       = "${aws_iam_role.ecs_task_execution_role.arn}"
-  task_role_arn            = "${aws_iam_role.ecs_task_role.arn}"
+  network_mode             = "awsvpc"
+  memory                   = 512
+  cpu                      = 256
+  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn            = aws_iam_role.ecs_task_role.arn
 }
 
 // ecs service
 resource "aws_ecs_service" "my_aws_ecs_service" {
   name            = "discordbotservice"
-  desired_count = 1
+  desired_count   = 1
   cluster         = aws_ecs_cluster.my_aws_ecs_cluster.id
   task_definition = aws_ecs_task_definition.my_aws_ecs_task_definition.arn
-  launch_type = "FARGATE"
+  launch_type     = "FARGATE"
 
   tags = {
     environment = "evelopment"
   }
 
   network_configuration {
-    subnets = [module.vpcmodule.subnet_id]
-    security_groups = [module.vpcmodule.default_security_group_id]
+    subnets          = [module.vpcmodule.subnet_id]
+    security_groups  = [module.vpcmodule.default_security_group_id]
     assign_public_ip = true
   }
 }

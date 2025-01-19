@@ -8,15 +8,15 @@ resource "aws_cloudwatch_log_stream" "my_aws_cloudwatch_log_stream" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "foobar" {
-  alarm_name                = "discordbotalarm"
-  comparison_operator       = "GreaterThanOrEqualToThreshold"
-  evaluation_periods        = 2
-  metric_name               = "CPUUtilization"
-  namespace                 = "AWS/ECS"
-  period                    = 120
-  statistic                 = "Average"
-  threshold                 = 80
-  alarm_description         = "This metric monitors ecs cpu utilisation"
+  alarm_name          = "discordbotalarm"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ECS"
+  period              = 120
+  statistic           = "Average"
+  threshold           = 80
+  alarm_description   = "This metric monitors ecs cpu utilisation"
 }
 
 
